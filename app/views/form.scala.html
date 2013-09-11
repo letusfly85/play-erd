@@ -1,0 +1,18 @@
+@(msTablesForm: Form[models.MsTables])
+@import helper._
+<html>
+<head>
+    <title>register</title>
+</head>
+<body>
+<h1>register user</h1>
+@helper.form(action = routes.MsTablesController.register) {
+    <fieldset>
+        @inputText(msTablesForm("name"), '_label -> "name")
+        @inputText(msTablesForm("mail"), '_label -> "mail address")
+        @inputText(msTablesForm("age"),  '_label -> "age")
+    </fieldset>
+    <input type="submit" class="btn primary" value="register">
+}
+</body>
+</html>
