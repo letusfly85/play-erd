@@ -8,8 +8,6 @@ GET     /                           controllers.Application.index
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
-GET     /ms_tables                  controllers.Application.ms_tables
+GET     /ms_tables                  controllers.MsTableController.ms_tables
 
-POST    /ms_tables                  controllers.Application.new_ms_tables
-
-GET     /tasks                      controllers.Application.tasks
+POST    /ms_tables                  controllers.MsTableController.new_ms_tables
