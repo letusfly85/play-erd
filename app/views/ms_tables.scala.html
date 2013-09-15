@@ -1,0 +1,28 @@
+@(ms_tables: List[MsTable], msTableForm: Form[String])
+
+@import helper._
+
+@main("Todo list") {
+
+<h1>@ms_tables.size ms_table(s)</h1>
+
+<ul>
+    @ms_tables.map { ms_table =>
+    <li>
+        @ms_table.tableId
+        @ms_table.physicalTableName
+        @ms_table.revision
+    </li>
+    }
+</ul>
+
+<h2>Add a new table</h2>
+
+@form(routes.Application.new_ms_tables) {
+
+@inputText(msTableForm("physicalTableName"))
+
+<input type="submit" value="Create">
+
+}
+}
