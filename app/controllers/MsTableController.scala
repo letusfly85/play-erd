@@ -12,17 +12,16 @@ object MsTableController extends Controller {
   )
 
   def ms_tables = Action {
-    Ok(views.html.ms_tables(MsTable.list, msTableForm))
+    Ok(views.html.ms_tables(MsTable.list, msTableForm, result = List()))
   }
 
-  def new_ms_tables =  Action { implicit request =>
+  def find_ms_table =  Action { implicit request =>
     msTableForm.bindFromRequest.fold(
-      errors => BadRequest(views.html.ms_tables(MsTable.list, errors)),
+      errors => BadRequest(views.html.ms_tables(MsTable.list, errors, List())),
       physicalTableName => {
-        MsTable.create(physicalTableName)
-        Redirect(routes.MsTableController.ms_tables)
+        val result: List[MsTable] = MsTable.find(physicalTableName)
+        Ok(views.html.ms_tables(MsTable.list, msTableForm, result))
       }
     )
   }
-
 }

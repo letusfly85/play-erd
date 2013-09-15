@@ -27,11 +27,16 @@ object MsTable {
     }
   }
 
-  def find(physicalTableName: String): MsTable = new MsTable(new BigDecimal(0), "test", new BigDecimal(0))
+  def find(physicalTableName: String): List[MsTable] ={
+    println(physicalTableName)
 
-  def create(physicalTableName: String) {
-    print(physicalTableName)
+    val result: List[MsTable] = DB.withConnection { implicit conn: Connection =>
+      SQL("SELECT TABLE_ID, PHYSICAL_TABLE_NAME, REVISION FROM MS_TABLES WHERE PHYSICAL_TABLE_NAME = {physicalTableName}")
+        .on("physicalTableName" -> physicalTableName).as(ms_table *)
+    }
+
+    if (!result.isEmpty) println(result.head.physicalTableName)
+
+    result
   }
-
-
 }

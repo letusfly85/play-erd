@@ -10,4 +10,4 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 GET     /ms_tables                  controllers.MsTableController.ms_tables
 
-POST    /ms_tables                  controllers.MsTableController.new_ms_tables
+POST    /ms_tables                  controllers.MsTableController.find_ms_table
