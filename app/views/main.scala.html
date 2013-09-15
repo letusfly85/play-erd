@@ -1,15 +1,117 @@
 @(title: String)(content: Html)
+<head>
+    <style type="text/css"><!--
+.liste {}
+.liste ul { list-style:none; margin:0; }
+.liste ul li { font-family: Ricty Diminished,helvetica,Arial,sans-serif; font-size:13px; }
+.liste ul li a {  display:block; width:230px; height:28px; background-color:#e9ffe5;
+                    border-top:5px solid #bdffb2;
+                    border-left:1px solid #e9ffe5; border-right:1px solid #e9ffe5;
+                    border-bottom-color: #e9ffe5;  border-bottom-width: 1px;
+                    border-bottom-style: solid;
+                    padding-left:10px;text-decoration:none; color:#11114c; }
+.liste ul li a:hover {  -moz-transform:rotate(-5deg); -moz-box-shadow:10px 10px 20px #000000;
+                          -webkit-transform:rotate(-5deg); -webkit-box-shadow:10px 10px 20px #000000;
+                          transform:rotate(-5deg); box-shadow:10px 10px 20px #000000; }
 
-<!DOCTYPE html>
+.mytitle font:hover {background-color:#D7F2FF;}
 
-<html>
-    <head>
-        <title>@title</title>
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
-        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
-        <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
-    </head>
-    <body>
-        @content
-    </body>
-</html>
+ul.navi {
+  width:220px;
+  margin:0px;
+}
+
+ul.navi, ul.menu {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+div.category {
+  margin-top:5px;
+  height:40px;
+  line-height:40px;
+  background-color:#ffcdb2;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  cursor:pointer;
+}
+
+ul.menu a{
+  display:block;
+  height:35px;
+  line-height:35px;
+  color:#164158;
+  background-color:#ffeee5;
+}
+
+-->
+</style>
+</head>
+<body style="background-image:url(@routes.Assets.at("images/er_body.jpg"))"; font-family:Times New Roman, helvetica,Arial,sans-serif; margin-top:0; margin-left:0; margin-right:0;">
+<script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" ></script>
+<script type="text/javascript">
+    $(function(){
+    $("ul.menu").hide();
+    $("div.category").click(function(){
+    $("ul.menu").hide();
+    if($("+ul",this).css("display")=="none"){
+    $("+ul",this).show();
+    }
+    })
+    })
+</script>
+<table class="header" width="100%">
+    <td style="padding-top:0px;">
+        <a href="/"><img src="@routes.Assets.at("images/er_head.jpg")"></a>
+    </td>
+</table>
+<table class="middle">
+    <td style="width:200px; vertical-align:top; padding-top:10px; font-size:12px">
+        <ul class="navi">
+            <li>
+                <div class="category"><image src="@routes.Assets.at("images/cat_table.jpg")"></div>
+                <ul class="menu">
+                    <li><a href="/ms_tables">テーブル一覧</a></li>
+                    <li><a href="/rs_err_objects">不正なオブジェクト一覧</a></li>
+                    <li><a href="/tr_log2phy_dict_infos/converter">論物変換</a></li>
+                    <li ><a href="/">定義書のカラムを検索</a></li>
+                    <li><a href="/search_physical_columns/column_list">定義書の物理カラムをまとめて検索</a></li>
+                    <li ><a href="/search_erd_objects">ソースのカラムを検索</a><li>
+                    <li ><a href="/ms_tab_columns/before_check">定義情報をERD申請前にチェックする</a></li>
+
+                </ul>
+            </li>
+            <li>
+                <div class="category"><image src="@routes.Assets.at("images/cat_code.jpg")"></div>
+                <ul class="menu">
+                    <li><a href="/kr_jyb_code_renbans">コードの最大値</a></li>
+                    <li><a href="/sm_jyb_code_names">コード・区分一覧</a></li>
+                    <li><a href="/tp_kbn_common_consts">ソースのコードを検索</a></li>
+                    <li><a href="/m_cm_hnyo_cds">汎用コードマスタ検索</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="category"><image src="@routes.Assets.at("images/cat_perf.jpg")"></div>
+                <ul class="menu">
+                    <li><a href="/tr_cmdbase_test_summaries">バッチ処理の日次テストの結果一覧</a></li>
+                    　</ul>
+            </li>
+        </ul>
+    </td>
+<td style="vertical-align:top; padding-left:10px">
+    <table class="main">
+        <td class="side">
+            @content
+        </td>
+    </table>
+</td>
+</table>
+<footer>
+    <table  width="100%">
+        <td bgcolor="#320028" style="margin-left:0; margin-right:0; font-size:15px; color:white">
+            <p><i>created by JYB Database Architect <%= Time.now.year %>,  Presented by ERD Repository Project // assigned member: Koichiro.Hiraoka, Katsuhiko.Sugiyama, Shinsuke.Sugie, Tatsuki.Fujiwara</i></p>
+        </td>
+    </table>
+</footer>
+</body>

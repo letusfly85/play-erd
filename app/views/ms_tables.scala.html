@@ -3,9 +3,8 @@
 @import helper._
 
 @main("Todo list") {
-
+<body>
     <h1>@ms_tables.size ms_table(s)</h1>
-
     <ul>
         @ms_tables.map { ms_table =>
         <li>
@@ -21,12 +20,11 @@
     <p>@result.head.physicalTableName</p>
     }
 
-}
     <h2>Find Table</h2>
 
     @form(routes.MsTableController.find_ms_table) {
         @inputText(msTableForm("physicalTableName"))
         <input type="submit" value="search">
     }
-
-
+</body>
+}
