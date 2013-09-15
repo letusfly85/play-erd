@@ -2,18 +2,59 @@
 
 @import helper._
 
-@main("Todo list") {
+@main("list of ms_tables") {
+<style type="text/css"><!--
+  body {
+    font-family:Helvetica, Arial, Sans;
+    margin: 0;
+    padding: 0;
+    font-size: 85%;
+  }
+
+  .mst {
+	border-collapse: collapse;
+    border-spacing: 0;
+	width: 100%;
+	font-size: 85%;
+  }
+
+  .mst th {
+	padding: 10px;
+        /*border-style: solid;*/
+        background-color: #008080;
+        color :white;
+        background-image:url(@routes.Assets.at("images/er_th_dg.jpg"));
+  }
+
+  .mst tr {
+      background-color: white;
+  }
+-->
+</style>
 <body>
-    <h1>@ms_tables.size ms_table(s)</h1>
-    <ul>
+    <table class="mst">
+        <thead>
+        <tr>
+            <th width="100px" heigth="30px">チケット</th>
+            <th width="50px"  heigth="30px">サブ</th>
+            <th>テーブル名（論理）</th>
+            <th>テーブル名（物理）</th>
+            <th>テーブルコメント</th>
+        </tr>
+        </thead>
+
+        <tbody>
         @ms_tables.map { ms_table =>
-        <li>
-            @ms_table.tableId
-            @ms_table.physicalTableName
-            @ms_table.revision
-        </li>
-        }
-    </ul>
+        <tr>
+            <td>@ms_table.ticketNumber</td>
+            <td>TODO</td>
+            <td>@ms_table.logicalTableName</td>
+            <td>@ms_table.physicalTableName</td>
+            <td>@ms_table.tableComment</td>
+        </tr>
+       }
+        </tbody>
+    </table>
 
     <h1>result area</h1>
     @if(result.length > 0) {

@@ -9,21 +9,28 @@ import java.sql.Connection
 
 import java.math.BigDecimal
 
-case class MsTable(tableId: BigDecimal, physicalTableName: String, revision: BigDecimal)
+case class MsTable(tableId: BigDecimal, logicalTableName: String, physicalTableName: String, tableComment: String, revision: BigDecimal, ticketNumber: BigDecimal)
 
 object MsTable {
 
   val ms_table = {
     get[BigDecimal]("TABLE_ID") ~
+    get[String]("LOGICAL_TABLE_NAME") ~
     get[String]("PHYSICAL_TABLE_NAME") ~
-    get[BigDecimal]("REVISION") map  {
-      case tableId ~ physicalTableName ~ revision => MsTable(tableId, physicalTableName, revision)
+    get[Option[String]]("TABLE_COMMENT") ~
+    get[BigDecimal]("REVISION") ~
+    get[BigDecimal]("TICKET_NUMBER") map  {
+      case tableId ~ logicalTableName ~ physicalTableName ~ Some(tableComment) ~ revision ~ ticketNumber =>
+        MsTable(tableId, logicalTableName, physicalTableName, tableComment, revision, ticketNumber)
+
+      case tableId ~ logicalTableName ~ physicalTableName ~ None ~ revision ~ ticketNumber =>
+        MsTable(tableId, logicalTableName, physicalTableName, "", revision, ticketNumber)
     }
   }
 
   def list: List[MsTable] = {
     DB.withConnection { implicit conn: Connection =>
-      SQL("SELECT TABLE_ID, PHYSICAL_TABLE_NAME, REVISION FROM MS_TABLES").as(ms_table *)
+      SQL("SELECT * FROM MS_TABLES").as(ms_table *)
     }
   }
 
@@ -31,7 +38,7 @@ object MsTable {
     println(physicalTableName)
 
     val result: List[MsTable] = DB.withConnection { implicit conn: Connection =>
-      SQL("SELECT TABLE_ID, PHYSICAL_TABLE_NAME, REVISION FROM MS_TABLES WHERE PHYSICAL_TABLE_NAME = {physicalTableName}")
+      SQL("SELECT * FROM MS_TABLES WHERE PHYSICAL_TABLE_NAME = {physicalTableName}")
         .on("physicalTableName" -> physicalTableName).as(ms_table *)
     }
 

@@ -48,7 +48,7 @@ ul.menu a{
 -->
 </style>
 </head>
-<body style="background-image:url(@routes.Assets.at("images/er_body.jpg"))"; font-family:Times New Roman, helvetica,Arial,sans-serif; margin-top:0; margin-left:0; margin-right:0;">
+<body style="background-image:url(@routes.Assets.at("images/er_body.jpg"))"; font-family:Arial, sans-serif, Helvetica; margin-top:0; margin-left:0; margin-right:0;">
 <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" ></script>
 <script type="text/javascript">
     $(function(){
@@ -101,6 +101,7 @@ ul.menu a{
     </td>
 <td style="vertical-align:top; padding-left:10px">
     <table class="main">
+        <br/>
         <td class="side">
             @content
         </td>
@@ -110,7 +111,7 @@ ul.menu a{
 <footer>
     <table  width="100%">
         <td bgcolor="#320028" style="margin-left:0; margin-right:0; font-size:15px; color:white">
-            <p><i>created by JYB Database Architect <%= Time.now.year %>,  Presented by ERD Repository Project // assigned member: Koichiro.Hiraoka, Katsuhiko.Sugiyama, Shinsuke.Sugie, Tatsuki.Fujiwara</i></p>
+            <p><i>created by JYB Database Architect</i></p>
         </td>
     </table>
 </footer>
