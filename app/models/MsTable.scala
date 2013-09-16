@@ -8,8 +8,15 @@ import anorm.SqlParser._
 import java.sql.Connection
 
 import java.math.BigDecimal
+import utils.AppProperties
 
-case class MsTable(tableId: BigDecimal, logicalTableName: String, physicalTableName: String, tableComment: String, revision: BigDecimal, ticketNumber: BigDecimal)
+
+case class MsTable(tableId: BigDecimal, logicalTableName: String, physicalTableName: String, tableComment: String, revision: BigDecimal, ticketNumber: BigDecimal) {
+  var url: String = AppProperties.issuesUrl + String.valueOf(ticketNumber)
+
+  //TODO
+  var subsystemName: String = "TODO"
+}
 
 object MsTable {
 

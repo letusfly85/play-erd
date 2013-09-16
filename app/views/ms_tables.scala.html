@@ -46,8 +46,8 @@
         <tbody>
         @ms_tables.map { ms_table =>
         <tr>
-            <td>@ms_table.ticketNumber</td>
-            <td>TODO</td>
+            <td><a  target=_blank href=@ms_table.url>@ms_table.ticketNumber</a></td>
+            <td>@ms_table.subsystemName</td>
             <td>@ms_table.logicalTableName</td>
             <td>@ms_table.physicalTableName</td>
             <td>@ms_table.tableComment</td>
