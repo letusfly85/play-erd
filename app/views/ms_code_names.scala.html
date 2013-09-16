@@ -1,3 +1,77 @@
-<body>
+@(ms_code_names: List[MsCodeName])
 
-</body>
+@import helper._
+
+@main("list of ms_code_names") {
+<style type="text/css"><!--
+  body {
+    font-family:Helvetica, Arial, Sans;
+    margin: 0;
+    padding: 0;
+    font-size: 85%;
+  }
+
+  .mst {
+    font-size: 85%;
+	border-collapse: collapse;
+    border-spacing: 0;
+  }
+
+  .mst tr {
+  }
+
+  .mst th {
+	padding: 5px;
+    background-image:url(@routes.Assets.at("images/er_th_db.jpg"));
+    height :10px;
+    color :white;
+  }
+
+  .mst th[data-sort]{
+    cursor:pointer;
+  }
+
+  .mst th:hover {
+    background-image:url(@routes.Assets.at("images/er_th_dp.jpg"));
+    color:black;
+    /*-moz-box-shadow:10px 10px 20px #ffff99;*/
+    filter:alpha(opacity=80);
+    opacity:0.8;
+  }
+
+  .mst tr {
+    background-color: white;
+  }
+-->
+</style>
+<script type="text/javascript" src="@routes.Assets.at("javascripts/stupidtable.min.js")" ></script>
+<script type="text/javascript">// <![CDATA[
+    $(function() {
+    $("#simpleTable").stupidtable();
+    });
+    // ]]></script>
+<h2>コード区分一覧</h2>
+
+<table id="simpleTable" class="mst">
+    <thead>
+    <tr>
+        <th data-sort="string">ID</th>
+        <th data-sort="string">コード論理名</th>
+        <th data-sort="string">コード物理名</th>
+        <th data-sort="string">管理テーブル（論理）</th>
+        <th data-sort="string">管理テーブル（物理）</th>
+    </tr>
+    </thead>
+    <tbody>
+    @ms_code_names.map { ms_code_name =>
+    <tr>
+        <td>@ms_code_name.codeId</td>
+        <td>@ms_code_name.logicalCodeName</td>
+        <td>@ms_code_name.physicalCodeName</td>
+        <td>@ms_code_name.logicalTableName</td>
+        <td>@ms_code_name.physicalTableName</td>
+    </tr>
+    }
+    </tbody>
+</table>
+}
