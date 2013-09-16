@@ -11,3 +11,5 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 GET     /ms_tables                  controllers.MsTableController.ms_tables
 
 POST    /ms_tables                  controllers.MsTableController.find_ms_table
+
+GET     /ms_code_names              controllers.MsCodeNameController.ms_code_names
